@@ -100,8 +100,7 @@ namespace StringCalculator
                     numbers = numbers.Substring(numbers.IndexOf("\\n") + 2);
                 }
 
-                //TODO: Return negatives string with console log error
-                string negatives = "";
+                List<string> negatives = new List<string>();
                 foreach (string number in numbers.Split(seperators, StringSplitOptions.None))
                 {
                     if (Convert.ToInt32(number) > 0)
@@ -110,8 +109,52 @@ namespace StringCalculator
                     }
                     else if (Convert.ToInt32(number) < 0)
                     {
-                        negatives += number;
+                        negatives.Add(number);
                     }
+                }
+
+                if (negatives.Count > 0)
+                {
+                    string message = "No negatives allowed: " + String.Join(",", negatives);
+                    throw new Exception(message);
+                }
+            }
+
+            return result;
+        }
+
+        public static int Add6(string numbers)
+        {
+            int result = 0;
+
+            if (numbers != "")
+            {
+                string[] seperators = new string[] { ",", "\\n" };
+
+                if (numbers.StartsWith("//"))
+                {
+                    seperators = new string[] { numbers[2].ToString() };
+
+                    numbers = numbers.Substring(numbers.IndexOf("\\n") + 2);
+                }
+
+                List<string> negatives = new List<string>();
+                foreach (string number in numbers.Split(seperators, StringSplitOptions.None))
+                {
+                    if (Convert.ToInt32(number) > 0 && Convert.ToInt32(number) <= 1000)
+                    {
+                        result += Convert.ToInt32(number);
+                    }
+                    else if (Convert.ToInt32(number) < 0)
+                    {
+                        negatives.Add(number);
+                    }
+                }
+
+                if (negatives.Count > 0)
+                {
+                    string message = "No negatives allowed: " + String.Join(",", negatives);
+                    throw new Exception(message);
                 }
 
             }

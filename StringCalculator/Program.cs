@@ -37,13 +37,34 @@ internal class Program
 
         //Console.WriteLine("Sum of string is: " + result4);
 
-        Console.WriteLine(@"Task 5: Please insert a string of any numbers, you can specify the delimiter by inserting //Delimeter\n before.");
+        //Console.WriteLine(@"Task 5: Please insert a string of any numbers, you can specify the delimiter by inserting //Delimeter\n before.");
 
-        string input5 = Console.ReadLine();
+        //string input5 = Console.ReadLine();
 
-        int result5 = Calculator.Add5(input5);
+        //try
+        //{
+        //    int result5 = Calculator.Add5(input5);
 
-        Console.WriteLine("Sum of string is: " + result5);
+        //    Console.WriteLine("Sum of string is: " + result5);
+        //}
+        //catch (Exception ex)
+        //{
+        //    Console.WriteLine(ex.Message);
+        //}
+
+        Console.WriteLine(@"Task 6: Please insert a string of any numbers, you can specify the delimiter by inserting //Delimeter\n before.");
+
+        try
+        {
+            string input6 = Console.ReadLine();
+
+            int result6 = Calculator.Add6(input6);
+
+            Console.WriteLine("Sum of string is: " + result6);
+        } catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
 
 
     }
