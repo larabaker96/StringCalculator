@@ -161,5 +161,135 @@ namespace StringCalculator
 
             return result;
         }
+
+        public static int Add7(string numbers)
+        {
+            int result = 0;
+
+            if (numbers != "")
+            {
+                string[] seperators = new string[] { ",", "\\n" };
+
+                if (numbers.StartsWith("//"))
+                {
+                    //substring from two to \n
+                    string seperator = numbers[2..numbers.IndexOf("\\n")];
+                    seperators = new string[] { seperator };
+
+                    numbers = numbers.Substring(numbers.IndexOf("\\n") + 2);
+                }
+
+                List<string> negatives = new List<string>();
+                foreach (string number in numbers.Split(seperators, StringSplitOptions.None))
+                {
+                    if (Convert.ToInt32(number) > 0 && Convert.ToInt32(number) <= 1000)
+                    {
+                        result += Convert.ToInt32(number);
+                    }
+                    else if (Convert.ToInt32(number) < 0)
+                    {
+                        negatives.Add(number);
+                    }
+                }
+
+                if (negatives.Count > 0)
+                {
+                    string message = "No negatives allowed: " + String.Join(",", negatives);
+                    throw new Exception(message);
+                }
+
+            }
+
+            return result;
+        }
+
+        public static int Add8(string numbers)
+        {
+            int result = 0;
+
+            if (numbers != "")
+            {
+                string[] seperators = new string[] { ",", "\\n" };
+
+                if (numbers.StartsWith("//"))
+                {
+                    //substring from two to \n
+                    string seperatorList = numbers[2..numbers.IndexOf("\\n")];
+
+                    //we want to split the list into the different square bracket pairs
+                    //we use RemoveEmptyEntries for the empty array objects between the brackets - otherwise the result would be "","delim1","","delim2","" etc
+                    seperators = seperatorList.Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries);
+
+                    numbers = numbers.Substring(numbers.IndexOf("\\n") + 2);
+                }
+
+                List<string> negatives = new List<string>();
+                foreach (string number in numbers.Split(seperators, StringSplitOptions.None))
+                {
+                    if (Convert.ToInt32(number) > 0 && Convert.ToInt32(number) <= 1000)
+                    {
+                        result += Convert.ToInt32(number);
+                    }
+                    else if (Convert.ToInt32(number) < 0)
+                    {
+                        negatives.Add(number);
+                    }
+                }
+
+                if (negatives.Count > 0)
+                {
+                    string message = "No negatives allowed: " + String.Join(",", negatives);
+                    throw new Exception(message);
+                }
+
+            }
+
+            return result;
+        }
+
+        //Same as number 8 because we didnt restrict the characters in the delimeter
+        public static int Add9(string numbers)
+        {
+            int result = 0;
+
+            if (numbers != "")
+            {
+                string[] seperators = new string[] { ",", "\\n" };
+
+                if (numbers.StartsWith("//"))
+                {
+                    //substring from two to \n
+                    string seperatorList = numbers[2..numbers.IndexOf("\\n")];
+
+                    //we want to split the list into the different square bracket pairs
+                    //we use RemoveEmptyEntries for the empty array objects between the brackets, otherwise the result would be "", "delim1", "", "delim2", "" etc
+                    seperators = seperatorList.Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries);
+
+                    numbers = numbers.Substring(numbers.IndexOf("\\n") + 2);
+                }
+
+                List<string> negatives = new List<string>();
+                foreach (string number in numbers.Split(seperators, StringSplitOptions.None))
+                {
+                    if (Convert.ToInt32(number) > 0 && Convert.ToInt32(number) <= 1000)
+                    {
+                        result += Convert.ToInt32(number);
+                    }
+                    else if (Convert.ToInt32(number) < 0)
+                    {
+                        negatives.Add(number);
+                    }
+                }
+
+                if (negatives.Count > 0)
+                {
+                    string message = "No negatives allowed: " + String.Join(",", negatives);
+                    throw new Exception(message);
+                }
+
+            }
+
+            return result;
+        }
     }
 }

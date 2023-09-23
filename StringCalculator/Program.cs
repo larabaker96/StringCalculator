@@ -52,20 +52,63 @@ internal class Program
         //    Console.WriteLine(ex.Message);
         //}
 
-        Console.WriteLine(@"Task 6: Please insert a string of any numbers, you can specify the delimiter by inserting //Delimeter\n before.");
+        //Console.WriteLine(@"Task 6: Please insert a string of any numbers, you can specify the delimiter by inserting //Delimeter\n before.");
+
+        //try
+        //{
+        //    string input6 = Console.ReadLine();
+
+        //    int result6 = Calculator.Add6(input6);
+
+        //    Console.WriteLine("Sum of string is: " + result6);
+        //} catch (Exception ex)
+        //{
+        //    Console.WriteLine(ex.Message);
+        //}
+
+        //Console.WriteLine(@"Task 7: Please insert a string of any numbers, you can specify the delimiter by inserting //Delimeter\n before.");
+
+        //try
+        //{
+        //    string input7 = Console.ReadLine();
+
+        //    int result7 = Calculator.Add7(input7);
+
+        //    Console.WriteLine("Sum of string is: " + result7);
+        //}
+        //catch (Exception ex)
+        //{
+        //    Console.WriteLine(ex.Message);
+        //}
+
+        Console.WriteLine(@"Task 8: Please insert a string of any numbers, you can specify as many delimiters as you would like by inserting //[Delimeter1][Delimeter2]\n before.");
 
         try
         {
-            string input6 = Console.ReadLine();
+            string input8 = Console.ReadLine();
 
-            int result6 = Calculator.Add6(input6);
+            int result8 = Calculator.Add8(input8);
 
-            Console.WriteLine("Sum of string is: " + result6);
-        } catch (Exception ex)
+            Console.WriteLine("Sum of string is: " + result8);
+        }
+        catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }
 
+        Console.WriteLine(@"Task 9: Please insert a string of any numbers, you can specify as many delimiters as you would like by inserting //[Delimeter1][Delimeter2]\n before.");
 
+        try
+        {
+            string input9 = Console.ReadLine();
+
+            int result9 = Calculator.Add9(input9);
+
+            Console.WriteLine("Sum of string is: " + result9);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
     }
 }
