@@ -9,8 +9,8 @@
 3. Allow the Add method to handle new lines between numbers (instead of commas)<br/>
    3.1. The following input is ok: <b>"1\n2,3"</b> (will equal 6)<br/>
    3.2. The following input is NOT ok: <b>"1,\n"</b> (no need to prove it, just clarifying)
-4. Support different delimeters
-   4.1. To change a delimeter, the beginning of the string will contain a seperate line that looks like this: <b>"//[delimeter]\n[numbers...]"</b> for example <b> "//;\n1;2"</b> should return 3 where the default delimeter is ';'.
+4. Support different delimeters <br/>
+   4.1. To change a delimeter, the beginning of the string will contain a seperate line that looks like this: <b>"//[delimeter]\n[numbers...]"</b> for example <b> "//;\n1;2"</b> should return 3 where the default delimeter is ';'. <br/>
    4.2. The first line is optional, all existing delimeters should still be supported.
 5. Calling add with a negative number will throw an exception "negatives not allowed" - and the negative that was passed. If there are multiple negatives, show all of them in the exception message.
 6. Numbers bigger than 1000 should be ignored, so adding 2 + 1001 - 2
