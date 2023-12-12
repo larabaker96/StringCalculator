@@ -18,12 +18,12 @@ public class StringCalculator
         numbersToCalculate = CheckForSeperators(numbersToCalculate);
         String[] splitNumbersToAdd = numbersToCalculate.Split(seperators, StringSplitOptions.None);
 
-        finalResult = CalculateSplitNumberAddition(splitNumbersToAdd);
+        CalculateSplitNumberAddition(splitNumbersToAdd);
 
         return finalResult;
     }
 
-    private int CalculateSplitNumberAddition(string[] splitNumbersToAdd)
+    private void CalculateSplitNumberAddition(string[] splitNumbersToAdd)
     {
         foreach (string currentNumber in splitNumbersToAdd)
         {
@@ -47,8 +47,6 @@ public class StringCalculator
             string message = "Negatives not allowed: " + String.Join(",", negativeNumbers);
             throw new Exception(message);
         }
-
-        return finalResult;
     }
 
     private string CheckForSeperators(string numbersToCalculate)
