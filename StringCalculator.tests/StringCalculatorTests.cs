@@ -55,4 +55,57 @@ public class StringCalculatorTests
 
         Assert.AreEqual(6, calculatedOutput);
     }
+
+    [TestCase(@"//;\n1;2")]
+    [Test]
+    public void Given_CustomDelimterOfOneCharacter_When_Adding_Returns_SumOfThoseNumbers(string value)
+    {
+        var calculatedOutput = _calculator.Add(value);
+
+        Assert.AreEqual(3, calculatedOutput);
+    }
+
+    [TestCase("-1,2,-3")]
+    [Test]
+    public void Given_NegativeNumbers_When_Adding_Returns_Exception(string value)
+    {
+        var exception = Assert.Throws<Exception>(() => _calculator.Add(value));
+        Assert.That(exception.Message, Is.EqualTo("Negatives not allowed: -1,-3"));
+    }
+
+    [TestCase("2,1001")]
+    [Test]
+    public void Given_NumberLargerThanThousand_When_Adding_Returns_SumOfNumbersSmallerThanThousand(string value)
+    {
+        var calculatedOutput = _calculator.Add(value);
+
+        Assert.AreEqual(2, calculatedOutput);
+    }
+
+    [TestCase("//***\\n1***2***3")]
+    [Test]
+    public void Given_LengthyDelimiter_When_Adding_Returns_SumOfThoseNumbers(string value)
+    {
+        var calculatedOutput = _calculator.Add(value);
+
+        Assert.AreEqual(6, calculatedOutput);
+    }
+
+    [TestCase(@"//[*][%]\n1*2%3")]
+    [Test]
+    public void Given_MultipleDelimiters_When_Adding_Returns_SumOfThoseNumbers(string value)
+    {
+        var calculatedOutput = _calculator.Add(value);
+
+        Assert.AreEqual(6, calculatedOutput);
+    }
+
+    [TestCase(@"//[***][%]\n1***2%3")]
+    [Test]
+    public void Given_MultipleLengthyDelimiters_When_Adding_Returns_SumOfThoseNumbers(string value)
+    {
+        var calculatedOutput = _calculator.Add(value);
+
+        Assert.AreEqual(6, calculatedOutput);
+    }
 }
