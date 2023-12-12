@@ -3,11 +3,12 @@ public class StringCalculator
 {
     private string[] seperators = new string[] { ",", "\\n" };
     private List<string> negativeNumbers = new List<string>();
+    private int maxNumberToAdd = 1000;
+    private int finalResult = 0;
 
     public int Add(string numbersGiven)
     {
         string numbersToCalculate = numbersGiven;
-        int finalResult = 0;
 
         if (String.IsNullOrEmpty(numbersToCalculate))
         {
@@ -17,19 +18,28 @@ public class StringCalculator
         numbersToCalculate = CheckForSeperators(numbersToCalculate);
         String[] splitNumbersToAdd = numbersToCalculate.Split(seperators, StringSplitOptions.None);
 
+        finalResult = CalculateSplitNumberAddition(splitNumbersToAdd);
+
+        return finalResult;
+    }
+
+    private int CalculateSplitNumberAddition(string[] splitNumbersToAdd)
+    {
         foreach (string currentNumber in splitNumbersToAdd)
         {
-            if (Convert.ToInt32(currentNumber) < 0)
+            int convertedCurrentNumber = Convert.ToInt32(currentNumber);
+
+            if (convertedCurrentNumber < 0)
             {
                 negativeNumbers.Add(currentNumber);
                 continue;
             }
-            else if (Convert.ToInt32(currentNumber) > 1000)
+            else if (convertedCurrentNumber > maxNumberToAdd)
             {
                 continue;
             }
 
-            finalResult += Convert.ToInt32(currentNumber);
+            finalResult += convertedCurrentNumber;
         }
 
         if (negativeNumbers.Count > 0)
