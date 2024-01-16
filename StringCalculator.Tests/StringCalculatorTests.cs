@@ -18,8 +18,50 @@ namespace StringCalculator.Tests
             string testInput = "";
             int expectedOutput = 0;
 
-            var calculatedOutput = _calculator.Add(testInput);
+            int calculatedOutput = _calculator.Add(testInput);
 
+            Assert.AreEqual(expectedOutput, calculatedOutput);
+        }
+
+        [Test]
+        public void Given_SingleNumber_When_Adding_Returns_ThatNumber()
+        {
+            string testInput = "1";
+            int expectedOutput = 1;
+
+            int calculatedOutput = _calculator.Add(testInput);
+
+            Assert.AreEqual(expectedOutput, calculatedOutput);
+        }
+
+        [Test]
+        public void Given_TwoNumbers_When_Adding_Returns_SumOfThoseNumbers()
+        {
+            string testInput = "1,2";
+            int expectedOutput = 3;
+
+            int calculatedOutput = _calculator.Add(testInput);
+
+            Assert.AreEqual(expectedOutput, calculatedOutput);
+        }
+
+        [Test]
+        public void Given_UnknownNumbers_When_Adding_Returns_SumOfThoseNumbers()
+        {
+            string testInput = "1,2,3,4,5";
+            int expectedOutput = 15;
+
+            int calculatedOutput = _calculator.Add(testInput);
+            Assert.AreEqual(expectedOutput, calculatedOutput);
+        }
+
+        [Test]
+        public void Given_UnknownNumbersAndNewLines_When_Adding_Returns_SumOfThoseNumbers()
+        {
+            string testInput = @"1\n2,3";
+            int expectedOutput = 6;
+
+            int calculatedOutput = _calculator.Add(testInput);
             Assert.AreEqual(expectedOutput, calculatedOutput);
         }
     }
