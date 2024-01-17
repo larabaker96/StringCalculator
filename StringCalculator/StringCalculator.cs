@@ -6,32 +6,93 @@
 
         public int Add(string numbersGiven)
         {
-            string[] seperators = new string[] { ",", "\\n" };
-
-            if (String.IsNullOrEmpty(numbersGiven))
+            if (string.IsNullOrEmpty(numbersGiven))
             {
                 return 0;
             }
 
-            String[] splitNumbersToAdd = numbersGiven.Split(seperators, StringSplitOptions.None);
+            string[] splitNumbersToAdd = SplitStringWithDefaultOrCustomSeperators(numbersGiven);
 
-            int finalResult = CalculateSplitNumberAddition(splitNumbersToAdd);
+            ValidateNumbersForNegatives(splitNumbersToAdd);
+
+            string[] splitAndFilteredNumbers = FilterNumbersToSumUnderLimit(splitNumbersToAdd);
+
+            int finalResult = CalculateSplitNumberAddition(splitAndFilteredNumbers);
 
             return finalResult;
         }
 
-        private int CalculateSplitNumberAddition(string[] splitNumbersToAdd)
+        private string[] SplitStringWithDefaultOrCustomSeperators(string numbersToSplit)
         {
-            int splitNumbersAdded = 0;
+            string numbersToCheckForSeperstors = numbersToSplit;
 
-            foreach (string currentNumber in splitNumbersToAdd)
+            string[] seperators = new string[] { ",", "\\n" };
+
+            if (numbersToCheckForSeperstors.StartsWith("//"))
             {
-                int convertedCurrentNumber = Convert.ToInt32(currentNumber);
+                string seperatorFromInput = numbersToSplit[2..numbersToSplit.IndexOf("\\n")];
+                seperators = seperatorFromInput.Split(new string[] { "[", "]" }, StringSplitOptions.RemoveEmptyEntries);
 
-                splitNumbersAdded += convertedCurrentNumber;
+                numbersToCheckForSeperstors = numbersToSplit.Substring(numbersToSplit.IndexOf("\\n") + 2);
             }
 
-            return splitNumbersAdded;
+            string[] numbersSplit = numbersToCheckForSeperstors.Split(seperators, StringSplitOptions.None);
+
+            return numbersSplit;
         }
+
+        private void ValidateNumbersForNegatives(string[] numbersToValidate)
+        {
+            List<string> negativeNumbers = new List<string>();
+
+            foreach (string currentNumber in numbersToValidate)
+            {
+                if (string.IsNullOrEmpty(currentNumber))
+                {
+                    continue;
+                }
+
+                int convertedCurrentNumber = Convert.ToInt32(currentNumber);
+
+                if (convertedCurrentNumber < 0)
+                {
+                    negativeNumbers.Add(currentNumber);                   
+                }
+            }
+
+            if (negativeNumbers.Count > 0)
+            {
+                string message = "Negatives not allowed: " + string.Join(",", negativeNumbers);
+                throw new Exception(message);
+            }
+        }
+
+        public string[] FilterNumbersToSumUnderLimit(string[] numbersToFilter)
+        {
+            string[] numbersFiltered = numbersToFilter.
+                Where(filterCheck => !string.IsNullOrEmpty(filterCheck) && Convert.ToInt32(filterCheck) <= maxNumberToAdd)
+                .ToArray();
+            return numbersFiltered;
+        }
+
+        private int CalculateSplitNumberAddition(string[] splitAndFilteredNumbersToAdd)
+        {
+            int splitNumbersAddedUp = 0;
+
+            foreach (string currentNumber in splitAndFilteredNumbersToAdd)
+            {
+                if (string.IsNullOrEmpty(currentNumber))
+                {
+                    continue;
+                }
+
+                int convertedCurrentNumber = Convert.ToInt32(currentNumber);
+
+                splitNumbersAddedUp += convertedCurrentNumber;
+            }
+
+            return splitNumbersAddedUp;
+        }
+
     }
 }
